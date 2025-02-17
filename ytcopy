@@ -1,0 +1,45 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: ytcopy [-o output_file] <URL>"
+    exit 1
+}
+
+while getopts "o:" opt; do
+    case $opt in
+        o)
+            CUSTOM_OUTPUT_FILE="$OPTARG"
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+
+shift $((OPTIND - 1))
+
+if [ -z "$1" ]; then
+    usage
+fi
+
+URL="$1"
+OUTPUT_FORMAT="%(title)s.%(ext)s"
+
+URL=$(echo "$URL" | sed -E 's|https?://x\.com|https://twitter.com|')
+
+echo "Final URL: $URL"
+
+if [ -n "$CUSTOM_OUTPUT_FILE" ]; then
+    OUTPUT_FORMAT="$CUSTOM_OUTPUT_FILE"
+fi
+
+VIDEO_FILE=$(yt-dlp --cookies-from-browser firefox -o "$OUTPUT_FORMAT" --print filename "$URL")
+
+yt-dlp --cookies-from-browser firefox -o "$OUTPUT_FORMAT" "$URL"
+
+if [ -f "$VIDEO_FILE" ]; then
+    echo -n "file://$(realpath "$VIDEO_FILE")" | wl-copy --type text/uri-list
+    echo "Copied to clipboard: $VIDEO_FILE"
+else
+    echo "Error: Video file not found!"
+fi

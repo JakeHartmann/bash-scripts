@@ -1,32 +1,47 @@
 # bash-scripts
 
-The 'copyvid' script is basically a modified version of this wonderful [fzf-preview](https://github.com/gmou3/fzf-preview) script, huge respect for the original dev.
+This repository contains useful Bash scripts.  
 
-## Requirements
-⚠️ For both scripts to work, you ought to be using Wayland. ⚠️
+## About  
+
+The **`copyvid`** script is a modified version of the excellent [fzf-preview](https://github.com/gmou3/fzf-preview) script. Huge respect to the original developer!  
+
+⚠️ **Both scripts require a Wayland environment.** ⚠️  
 
 ---
 
-### copyvid
+## 📜 Requirements  
+
+### **`copyvid`**
+This script allows quick video selection with preview support.  
+
+#### **Dependencies:**  
 - `fzf`
-- `fd` _(optional but recommended)_
+- `fd` _(optional but recommended for better file searching)_
 - `wl-clipboard`
-- `fzf-file2preview.sh` file in your $PATH from [fzf-preview](https://github.com/gmou3/fzf-preview)
-
-Only one of the following is needed:
-- `ueberzug` or `ueberzugpp`
-- `kitty` (If you're running inside a `kitty` terminal)
-- `chafa`
-- `catimg`
 - `realpath`
+- The `fzf-file2preview.sh` script (must be in your `$PATH`) from [fzf-preview](https://github.com/gmou3/fzf-preview)  
+
+#### **At least one of the following is required for image previews:**  
+- `ueberzug` or `ueberzugpp`  
+- `kitty` _(if running inside a `kitty` terminal)_  
+- `chafa`  
+- `catimg`  
 
 ---
 
-### ytcopy
+### **`ytcopy`**
+This script downloads videos using `yt-dlp` and copies the file path to the clipboard.  
+
+#### **Dependencies:**  
 - `yt-dlp`
 - `wl-clipboard`
 - `sed`
-- `realpath`
+- `realpath`  
 
-## Slight chances you may need to do
-If you're using a different browser other than Firefox, you should change lines 36 and 38 from the `ytcopy` file after the `--cookies-from-browser` flag accordingly, such as `chrome`, `brave`, `vivaldi`, etc.
+---
+
+## ⚙️ Possible Changes You May Need  
+
+If you're using a browser **other than Firefox**, update **lines 36 and 38** in `ytcopy` to match your browser, such as:
+`--cookies-from-browser chrome` or `--cookies-from-browser vivaldi`.  
